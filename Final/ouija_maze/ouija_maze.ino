@@ -35,7 +35,6 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(25, LED, NEO_GRB + NEO_KHZ800);
 int move_num = 0;
 int pos = 0;
 int path[] = {2,1,0,15,14,23,16,17,18,3,4,5,6,19,24,21,22,13,12,11,10};
-//int path[] = {2,1,0,15,14,23,16,17,18,19,24,21,22,13,12,11,10};
 boolean lit[] = {false, false, false, false, false, false, false, false, false, false,false, false, false, false, false,false, false, false, false, false, false, false, false, false, false};
 
 void setup() {
@@ -69,7 +68,7 @@ void loop() {
     lit[pos] = true;
     move_num++;
   }
-  else if (pos != 0){ //If they're on a position
+  else if (pos != -1){ //If they're on a position
     if((move_num > 0 && pos != path[move_num-1]) || move_num == 0){ //and it's different from the prev pos, if there is a prev pos
         reset();
      }
@@ -183,7 +182,7 @@ int getPos(){;
       return(12);    
   } 
   else{
-    return(0);
+    return(-1);
   }
 }
 
