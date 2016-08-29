@@ -1,28 +1,18 @@
 
 int sunPin = 9;
-int sunInitialBrightness = 125;
+int sunInitialBrightness = 110;
 int sunBrightness = sunInitialBrightness;
 
 void setup() {
-  // put your setup code here, to run once:
   Serial.begin(9600);
   pinMode(sunPin, OUTPUT);
 }
 
 void loop() {
-    //  digitalWrite(sunPin, HIGH);
-    //  delay(5000);
-    //  digitalWrite(sunPin, LOW);
-    //  delay(5000);
-    //Serial.println(sunBrightness);
+  //increase sunbrightness slowly until it reaches max
   while(sunBrightness<255){
     analogWrite(sunPin, sunBrightness);
     sunBrightness = sunBrightness+1;
-    Serial.println(sunBrightness);
-    delay(19200); //1800
+    delay(19200);
   }
-      
-     // digitalWrite(sunPin, HIGH);
-      //delay(2000); 
-
 }

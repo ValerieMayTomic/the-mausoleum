@@ -4,22 +4,26 @@
 int counter = 0;
 
 void setup() {
-  // put your setup code here, to run once:
-  Serial.begin(9600);
+  //Serial.begin(9600);
   pinMode(lockPin, OUTPUT);
+  pinMode(voltPin, INPUT);
   digitalWrite(lockPin, HIGH);
+
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  int sensorValue = analogRead(voltPin);
-  float voltage = sensorValue * (5.0 / 1023.0);
-  Serial.println(voltage);
-  if(voltage > 2.0)
+  int sensorValue = analogRead(voltPin); //read analog value
+  float voltage = sensorValue * (5.0 / 1023.0); //convert to voltage
+  if(voltage > 0.4){ //increase counter if voltage greater than .4
     counter++;
-  if(counter > 7){
+  }
+  if(counter > 7){ //open lock if counter goes above 7
     digitalWrite(lockPin, LOW);
-    //while(true);
+    counter = 0; //reset counter
+  }
+    if(voltage < 0.4){ //if voltage not above .4, reset counter
+    counter = 0;
+    digitalWrite(lockPin, HIGH);
   }
   delay(100);
 
